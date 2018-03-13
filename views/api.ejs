@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Airline UNIP System">
+    <meta name="author" content="Matheus Lucio">
+    <title>
+        <%= title %> - Unip Airlines
+    </title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="https://bootswatch.com/yeti/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+                        class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                        class="icon-bar"></span><span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="/"><i class="fa fa-cog"></i> <%= title %></a>
+        </div>
+        <!-- /.navbar-header -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><i class="fa fa-plane"></i> Voo's</a></li>
+                <li><a href="/passagens"><i class="fa fa-ticket"></i> Passagens</a></li>
+                <li><a href="/alunos"><i class="fa fa-users"></i> Alunos</a></li>
+                <li class="active"><a href="/api"><i class="fa fa-cog"></i> API</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">API</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-heading">Rest Client</div>
+                    <div class="panel-body">
+                        <p>Como a API é desenvolvida em Node.JS utilizando RESTFul utilizamos algum client REST para
+                            consumir a api.</p>
+
+                        <p>Para quem irá acessar via WEB sugiro o client <a href="http://hurl.eu" target="_blank">http://hurl.eu</a>
+                            para realizar os HTTP Requests descritos nesta API.</p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-success">
+                    <div class="panel-heading">Listar Voo's - GET /voo</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-voo-get">
+                            <script> document.getElementById('url-voo-get').innerHTML = 'GET http://' + location.host + '/voo'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Nenhum</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                [{"_id":"57b47349060844ec078fb4fe", "origem":"Aqaba, JO - Nuweiba, EG", "destino":"Egan,
+                                SD, Estados Unidos", "assentos":60, "dataOrigem":"2016-08-17T15:00:00.000Z",
+                                "dataDestino":"2016-08-18T15:00:00.000Z", "precoBasico":200, "precoExecutivo":270,
+                                "aberto":true, "__v":0}]
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-warning">
+                    <div class="panel-heading">Listar Voo - Individual - GET /voo/idVoo</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-voo-get-id">
+                            <script> document.getElementById('url-voo-get-id').innerHTML = 'GET http://' + location.host + '/voo/57b47349060844ec078fb4fe'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Enviar o <b>_id</b> no corpo da url /voo/idVoo.</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57b47349060844ec078fb4fe", "origem":"Aqaba, JO - Nuweiba, EG", "destino":"Egan,
+                                SD, Estados Unidos", "assentos":60, "dataOrigem":"2016-08-17T15:00:00.000Z",
+                                "dataDestino":"2016-08-18T15:00:00.000Z", "precoBasico":200, "precoExecutivo":270,
+                                "aberto":true, "__v":0}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-danger">
+                    <div class="panel-heading">Inserir Voo - POST /voo</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-voo-post">
+                            <script> document.getElementById('url-voo-post').innerHTML = 'POST http://' + location.host + '/voo'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>
+                            Enviar os parâmetros via corpo de requisição, com seus valores nos formatos abaixo:
+                            <br/>
+                            <br/>
+                            <b>origem:</b> String <br/>
+                            <b>destino:</b> String <br/>
+                            <b>assentos:</b> Number <br/>
+                            <b>dataOrigem:</b> Date <br/>
+                            <b>dataDestino:</b> Date <br/>
+                            <b>precoBasico:</b> Number <br/>
+                            <b>precoExecutivo:</b> Number <br/>
+                            <b>aberto:</b> Boolean
+                        </p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57b47349060844ec078fb4fe"}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-default">
+                    <div class="panel-heading">Editar Voo - PUT /voo/idVoo</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-voo-put-id">
+                            <script> document.getElementById('url-voo-put-id').innerHTML = 'PUT http://' + location.host + '/voo/57b47349060844ec078fb4fe'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>
+                            Enviar o <b>_id</b> no corpo da url /voo/idVoo e enviar o parâmetro via corpo de requisicão
+                            que deseja atualizar, com o seu novo valor:
+                            <br/>
+                            <br/>
+                            <b>origem:</b> New String <br/>
+                            <b>destino:</b> New String <br/>
+                            <b>assentos:</b> New Number <br/>
+                            <b>dataOrigem:</b> New Date <br/>
+                            <b>dataDestino:</b> New Date <br/>
+                            <b>precoBasico:</b> New Number <br/>
+                            <b>precoExecutivo:</b> New Number <br/>
+                            <b>aberto:</b> New Boolean
+                        </p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57b47349060844ec078fb4fe", "origem":"Aqaba, JO - Nuweiba, EG", "destino":"Egan,
+                                SD, Estados Unidos", "assentos":60, "dataOrigem":"2016-08-17T15:00:00.000Z",
+                                "dataDestino":"2016-08-18T15:00:00.000Z", "precoBasico":200, "precoExecutivo":270,
+                                "aberto":true, "__v":0}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-heading">Apagar Voo - DELETE /voo/idVoo</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-voo-delete-id">
+                            <script> document.getElementById('url-voo-delete-id').innerHTML = 'DELETE http://' + location.host + '/voo/57b47349060844ec078fb4fe'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Enviar o <b>_id</b> no corpo da url /voo/idVoo.</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57b47349060844ec078fb4fe"}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-success">
+                    <div class="panel-heading">Listar Passagem - GET /passagem</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-passagem-get">
+                            <script> document.getElementById('url-passagem-get').innerHTML = 'GET http://' + location.host + '/passagem'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Nenhum</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                [{"_id":"57de6dde7b573ca9b4b93d71","tipoAssento":"Básico","numeroAssento":2,"nomePassageiro":"João Neves","_voo":"57be39fdfe81c61100cbed06","__v":0}]
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-warning">
+                    <div class="panel-heading">Listar Passagem - Individual - GET /passagem/idPassagem</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-passagem-get-id">
+                            <script> document.getElementById('url-passagem-get-id').innerHTML = 'GET http://' + location.host + '/passagem/57de6dde7b573ca9b4b93d71'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Enviar o <b>_id</b> no corpo da url /voo/idPassagem.</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57de6dde7b573ca9b4b93d71","tipoAssento":"Básico","numeroAssento":2,"nomePassageiro":"João Neves","_voo":"57be39fdfe81c61100cbed06","__v":0}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-danger">
+                    <div class="panel-heading">Inserir Passagem - POST /passagem</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-passagem-post">
+                            <script> document.getElementById('url-passagem-post').innerHTML = 'POST http://' + location.host + '/passagem'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>
+                            Enviar os parâmetros via corpo de requisição, com seus valores nos formatos abaixo:
+                            <br/>
+                            <br/>
+                            <b>_voo:</b> {type: mongoose.Schema.Types.ObjectId, ref: 'Voo', required: true} <br/>
+                            <b>tipoAssento:</b> String <br/>
+                            <b>numeroAssento:</b> Number <br/>
+                            <b>nomePassageiro:</b> String <br />
+                            <br />
+                            <i>O parâmetro <b>_voo</b> é oriundo do objeto rest <b>/voo</b>, ou seja, para inserção de uma passagem se faz necessário um <b>idVoo (_voo)</b>.</i>
+                        </p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57de6dde7b573ca9b4b93d71"}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-default">
+                    <div class="panel-heading">Editar Passagem - PUT /passagem/idPassagem</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-passagem-put-id">
+                            <script> document.getElementById('url-passagem-put-id').innerHTML = 'PUT http://' + location.host + '/passagem/57de6dde7b573ca9b4b93d71'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>
+                            Enviar o <b>_id</b> no corpo da url /passagem/idPassagem e enviar o parâmetro via corpo de requisicão
+                            que deseja atualizar, com o seu novo valor:
+                            <br/>
+                            <br/>
+                            <b>_voo:</b> new {type: mongoose.Schema.Types.ObjectId, ref: 'Voo', required: true} <br/>
+                            <b>tipoAssento:</b> new String <br/>
+                            <b>numeroAssento:</b> new Number <br/>
+                            <b>nomePassageiro:</b> new String <br />
+                            <br />
+                            <i>O parâmetro <b>_voo</b> é oriundo do objeto rest <b>/voo</b>, ou seja, para inserção de uma passagem se faz necessário um <b>idVoo (_voo)</b>.</i>
+                        </p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57de6dde7b573ca9b4b93d71","tipoAssento":"Básico","numeroAssento":2,"nomePassageiro":"João Neves","_voo":"57be39fdfe81c61100cbed06","__v":0}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-heading">Apagar Passagem - DELETE /passagem/idPassagem</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-passagem-delete-id">
+                            <script> document.getElementById('url-passagem-delete-id').innerHTML = 'DELETE http://' + location.host + '/passagem/57de6dde7b573ca9b4b93d71'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Enviar o <b>_id</b> no corpo da url /passagem/idPassagem.</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"_id":"57b47349060844ec078fb4fe"}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-danger">
+                    <div class="panel-heading">Verificar Passagens Disponíveis por Voo - GET /passagem/disponivel/idVoo</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <h3>URL</h3>
+
+                        <p id="url-voo-passagem-id">
+                            <script> document.getElementById('url-voo-passagem-id').innerHTML = 'GET http://' + location.host + '/passagem/disponivel/57be39fdfe81c61100cbed06'; </script>
+                        </p>
+                        <h3>Parâmetros - Request</h3>
+
+                        <p>Enviar o <b>_id</b> no corpo da url /passagem/disponivel/idVoo.</p>
+
+                        <h3>Retorno - Response</h3>
+
+                        <p>
+                            <code>
+                                {"voo":"57be39fdfe81c61100cbed06","qtdPassagens":1,"capacidadeVoo":33,"passagensRestantes":32,"disponivel":false}
+                            </code>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">
+            Tecnologias: <img src="https://img.shields.io/badge/node-js-43853d.svg">
+            <img src="https://img.shields.io/badge/express-js-259dff.svg">
+            <img src="https://img.shields.io/badge/mongo-db-6aaf4e.svg">
+            <img src="https://img.shields.io/badge/jquery-js-0769ad.svg">
+            <img src="https://img.shields.io/badge/bootstrap-css-6f5499.svg">
+        </p>
+    </div>
+</footer>
+<!-- jQuery -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script src="/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="/dist/js/sb-admin-2.js"></script>
+<script src="/bower_components/jquery/dist/jquery.formatDateTime.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/pt-br.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyCqD6cqGfHpXLZiQnxtIhcVY-nb9UfAXQA"></script>
+<script src="/bower_components/jquery/dist/jquery.geocomplete.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<style>
+    .pac-container {
+        z-index: 2000 !important;
+    }
+
+    #page-wrapper {
+        margin: 0 0 0 0;
+        border: 0;
+    }
+
+    .footer {
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 70px;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+    }
+
+    .container .text-muted {
+        margin: 20px 0;
+    }
+</style>
+</body>
+
+</html>

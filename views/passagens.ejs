@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Airline UNIP System">
+    <meta name="author" content="Matheus Lucio">
+    <title>
+        <%= title %> - Unip Airlines
+    </title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="https://bootswatch.com/yeti/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+                        class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                        class="icon-bar"></span><span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="/"><i class="fa fa-ticket"></i> <%= title %></a>
+        </div>
+        <!-- /.navbar-header -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><i class="fa fa-plane"></i> Voo's</a></li>
+                <li class="active"><a href="/passagens"><i class="fa fa-ticket"></i> Passagens</a></li>
+                <li><a href="/alunos"><i class="fa fa-users"></i> Alunos</a></li>
+                <li><a href="/api"><i class="fa fa-cog"></i> API</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Passagens
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalInserirPopup"
+                            onclick="loadTrechos()"><i class="fa fa-plus"></i> Nova
+                    </button>
+                </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12" id="modalInserir">
+                <!-- Modal -->
+                <div class="modal fade" id="modalInserirPopup" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Inserir Passagem</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formInserePassagem" method="POST">
+                                    <div class="form-group">
+                                        <label for="trecho">Trecho</label>
+                                        <select class="form-control" id="trecho" name="trecho" required>
+                                            <option value="" selected>Selecionar Trecho</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group infotrecho"></div>
+                                    <div class="form-group">
+                                        <label for="destino">Tipo de Assento</label>
+                                        <select class="form-control" id="tipoAssento" nam="tipoAssento" required>
+                                            <option value="Básico">Básico</option>
+                                            <option value="Executivo">Executivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nomePassageiro">Nome do Passageiro</label>
+                                        <input type="text" class="form-control" id="nomePassageiro"
+                                               name="nomePassageiro" placeholder="Nome do Passageiro" required>
+                                    </div>
+                                    <div class="form-group cadeirastrecho"></div>
+                                    <button id="enviaInserePassagem" type="submit" class="hide"></button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                                            class="fa fa-close"></i> Cancelar
+                                </button>
+                                <button type="button" class="btn btn-success"
+                                        onclick="$('#enviaInserePassagem').trigger('click');"><i class="fa fa-plus"></i>
+                                    Inserir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12" id="modalEditar">
+                <!-- Modal -->
+                <div class="modal fade" id="modalEditarPopup" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Editar Passagem</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formEditaPassagem" method="POST">
+                                    <div class="form-group">
+                                        <label for="trecho">Trecho</label>
+                                        <select class="form-control" id="trecho" name="trecho" required>
+                                            <option value="" selected>Selecionar Trecho</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group infotrecho"></div>
+                                    <div class="form-group">
+                                        <label for="destino">Tipo de Assento</label>
+                                        <select class="form-control" id="tipoAssento" nam="tipoAssento" required>
+                                            <option value="Básico">Básico</option>
+                                            <option value="Executivo">Executivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nomePassageiro">Nome do Passageiro</label>
+                                        <input type="text" class="form-control" id="nomePassageiro"
+                                               name="nomePassageiro" placeholder="Nome do Passageiro" required>
+                                    </div>
+                                    <div class="form-group cadeirastrecho"></div>
+                                    <button id="enviaEditaPassagem" type="submit" class="hide"></button>
+                                    <input name="_id" id="_id" value="" type="hidden">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                        id="cancelarEditaPassagem"><i class="fa fa-close"></i> Cancelar
+                                </button>
+                                <button type="button" class="btn btn-success"
+                                        onclick="$('#enviaEditaPassagem').trigger('click');"><i class="fa fa-save"></i>
+                                    Atualizar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-heading">Listando Passagens Cadastradas</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="dataTable_wrapper">
+                            <table width="100%" class="table table-striped table-bordered table-hover"
+                                   id="dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>Nome do Passageiro</th>
+                                    <th>Número do Assento</th>
+                                    <th>Tipo do Assento</th>
+                                    <th>Trecho</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">
+            Tecnologias: <img src="https://img.shields.io/badge/node-js-43853d.svg">
+            <img src="https://img.shields.io/badge/express-js-259dff.svg">
+            <img src="https://img.shields.io/badge/mongo-db-6aaf4e.svg">
+            <img src="https://img.shields.io/badge/jquery-js-0769ad.svg">
+            <img src="https://img.shields.io/badge/bootstrap-css-6f5499.svg">
+        </p>
+    </div>
+</footer>
+<!-- jQuery -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script src="/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="/dist/js/sb-admin-2.js"></script>
+<script src="/bower_components/jquery/dist/jquery.formatDateTime.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/pt-br.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyCqD6cqGfHpXLZiQnxtIhcVY-nb9UfAXQA"></script>
+<script src="/bower_components/jquery/dist/jquery.geocomplete.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function () {
+        $(document).ajaxStart(function () {
+            $.blockUI({
+                message: '<img src="/loading.gif">',
+                css: {backgroundColor: 'transparent', border: 'none', 'z-index': '99999'}
+            });
+        }).ajaxStop($.unblockUI);
+
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            language: {
+                url: 'http://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json'
+            }
+        });
+        setTimeout(function () {
+            updatePassagens();
+            $('.datetimepicker').datetimepicker({
+                locale: 'pt-br'
+            });
+            $('.input-datetime').click(function () {
+                $(this).parent().find('.input-group-addon').trigger('click');
+            });
+            $('.money').mask('#.##0,00', {
+                reverse: true
+            });
+            $('.number').mask('0#');
+            $('.input-datetime').mask('00/00/0000 00:00');
+        }, 1000);
+        $('.geocomplete').geocomplete();
+        $('#formInserePassagem').submit(function (e) {
+            e.preventDefault();
+
+            if ($('#formInserePassagem #assentoEscolhido').val() == '') {
+                swal({text: 'Favor selecionar número do assento.', title: 'Alerta', type: 'warning'});
+            } else {
+                $.ajax({
+                    url: '/passagem',
+                    data: {
+                        _voo: $('#formInserePassagem #trecho').val(),
+                        tipoAssento: $('#formInserePassagem #tipoAssento').val(),
+                        nomePassageiro: $('#formInserePassagem #nomePassageiro').val(),
+                        numeroAssento: $('#formInserePassagem #assentoEscolhido').val()
+                    },
+                    contentType: 'application/x-www-form-urlencoded',
+                    method: 'POST',
+                    success: function (json) {
+                        $('#formInserePassagem')[0].reset();
+                        $('#modalInserirPopup').find('.btn-danger').trigger('click');
+                        swal({text: 'Passagem cadastrada com sucesso.', title: 'Alerta', type: 'success'});
+                    }
+                });
+                updatePassagens();
+            }
+        });
+
+        $('#formEditaPassagem').submit(function (e) {
+            e.preventDefault();
+
+            if ($('#formEditaPassagem #assentoEscolhido').val() == '') {
+                swal({text: 'Favor selecionar número do assento.', title: 'Alerta', type: 'warning'});
+            } else {
+                $.ajax({
+                    url: '/passagem/' + $('#formEditaPassagem #_id').val(),
+                    data: {
+                        _voo: $('#formEditaPassagem #trecho').val(),
+                        tipoAssento: $('#formEditaPassagem #tipoAssento').val(),
+                        nomePassageiro: $('#formEditaPassagem #nomePassageiro').val(),
+                        numeroAssento: $('#formEditaPassagem #assentoEscolhido').val()
+                    },
+                    contentType: 'application/x-www-form-urlencoded',
+                    method: 'PUT',
+                    success: function (json) {
+                        $('#formEditaPassagem')[0].reset();
+                        $('#modalEditarPopup').find('.btn-danger').trigger('click');
+                        swal({text: 'Passagem editada com sucesso.', title: 'Alerta', type: 'success'});
+                    }
+                });
+            }
+            updatePassagens();
+        });
+
+        $('select[name=trecho]').on('change', function () {
+            if (this.value == '') {
+                $('.infotrecho').html('');
+            } else {
+                $.ajax({
+                    url: '/voo/' + this.value,
+                    method: 'GET',
+                    success: function (json) {
+                        if (json.aberto == true) {
+                            var vooPai = json;
+
+                            $('.infotrecho').html('');
+                            $('.infotrecho').append('<b>Origem:</b> ' + json.origem + '<br />');
+                            $('.infotrecho').append('<b>Destino:</b> ' + json.destino + '<br />');
+                            $('.infotrecho').append('<b>Data Origem:</b> ' + $.formatDateTime('dd/mm/yy gg:ii', new Date(json.dataOrigem)) + '<br />');
+                            $('.infotrecho').append('<b>Data Destino:</b> ' + $.formatDateTime('dd/mm/yy gg:ii', new Date(json.dataDestino)) + '<br />');
+                            $('.infotrecho').append('<b>Preço Básico:</b> R$ ' + json.precoBasico + '<br />');
+                            $('.infotrecho').append('<b>Preço Executivo:</b> R$ ' + json.precoExecutivo + '<br />');
+                            $('.infotrecho').append('<b>Capacidade de Passagens:</b> ' + json.assentos + '<br />');
+
+                            $.ajax({
+                                url: '/passagem/disponivel/' + json._id,
+                                method: 'GET',
+                                success: function (json) {
+                                    if (json.passagensRestantes > 0) {
+                                        $('.infotrecho').append('<b>Passagens Vendidas:</b> ' + json.qtdPassagens + '<br />');
+                                        $('.infotrecho').append('<b>Passagens Disponíveis:</b> ' + json.passagensRestantes + '<br />');
+
+                                        $('.cadeirastrecho').html('');
+                                        $('.cadeirastrecho').append('<label for="nomePassageiro">Assentos Disponíveis</label><input name="assentoEscolhido" id="assentoEscolhido" type="hidden" value=""><br />');
+
+                                        for (var i = 0; i < vooPai.assentos; i++) {
+                                            $('.cadeirastrecho').append('<button type="button" class="btn btn-success assentos assento' + (i + 1) + '" style="width:44px;" title="Assento Disponível" onclick="window.assentoEscolhido(' + (i + 1) + ')" data-assento="' + (i + 1) + '" data-voopai="' + vooPai._id + '"><b>' + (i + 1) + '</b></button> ');
+
+                                            if ((i + 1) % 8 == 0) {
+                                                $('.cadeirastrecho').append('<br />');
+                                            }
+                                        }
+
+                                        $(json.passagens).each(function (key, value) {
+                                            $('.assento' + value.numeroAssento).attr('class', 'btn btn-danger assentos assento' + value.numeroAssento).attr('data-original-title', 'Assento Reservado').attr('title', 'Assento Reservado').attr('onclick', false).attr('data-reservado', 'true');
+                                        });
+                                    } else {
+                                        $('.infotrecho').html('');
+                                        $('select[name=trecho]').val('');
+                                        swal({
+                                            text: 'Este trecho já excedeu o número máximo passagens.',
+                                            title: 'Alerta',
+                                            type: 'error'
+                                        });
+                                    }
+
+                                    $('[title]').tooltip();
+                                }
+                            });
+                        } else {
+                            $('.infotrecho').html('');
+                            $('select[name=trecho]').val('');
+                            $('#cancelarEditaPassagem').trigger('click');
+                            swal({
+                                text: 'Este trecho não está aberto para alterações ou novas passagens.',
+                                title: 'Alerta',
+                                type: 'error'
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    function updatePassagens() {
+        var t = $('#dataTables-example').DataTable({
+            destroy: true,
+            responsive: true,
+            'language': {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ do total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 do total de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            }
+        });
+        t.clear().draw();
+        $.ajax({
+            url: '/passagem',
+            method: 'GET',
+            success: function (json) {
+                $.each(json, function (key, value) {
+                    var jsonVoo = {};
+
+                    $.ajax({
+                        url: '/voo/' + value._voo,
+                        async: false,
+                        dataType: 'json',
+                        success: function (json) {
+                            jsonVoo = json;
+                        }
+                    });
+
+                    t.row.add([value.nomePassageiro, value.numeroAssento, value.tipoAssento, jsonVoo.origem + ' <br /> ' + jsonVoo.destino, $.formatDateTime('dd/mm/yy - gg:ii', new Date(jsonVoo.dataOrigem)) + ' <br /> ' + $.formatDateTime('dd/mm/yy - gg:ii', new Date(jsonVoo.dataDestino)), actionBuilder(value._id, value)]).draw();
+                });
+                var last_clicked_id = null;
+                $('.deleteconfirm').click(function () {
+                    last_clicked_id = $(this).attr('id');
+                });
+                $('.deleteconfirm').confirmation({
+                    placement: 'left',
+                    title: 'Tem certeza?',
+                    btnOkLabel: '<i class="icon-ok-sign icon-white"></i> Sim',
+                    btnCancelLabel: '<i class="icon-remove-sign"></i> Não',
+                    singleton: true,
+                    onConfirm: function () {
+                        apagaPassagem(last_clicked_id);
+                    }
+                });
+                $('[title]').tooltip();
+            }
+        });
+        $('[title]').tooltip();
+    }
+
+    function actionBuilder(id, obj) {
+        var html = '<button type="button" class="btn btn-success col-md-12" id="' + id + '" onclick="editaPassagem(this)" title="Editar" data-toggle="modal" data-target="#modalEditarPopup"><i class="fa fa-edit"></i></button>';
+        html += ' ';
+        html += '<button type="button" class="btn btn-danger deleteconfirm col-md-12" id="' + id + '" title="Apagar"><i class="fa fa-trash"></i></button>';
+        html += ' ';
+        return html;
+    }
+
+    function apagaPassagem(id) {
+        $.ajax({
+            url: '/passagem/' + id,
+            method: 'DELETE',
+            success: function (json) {
+                swal({text: 'Passagem deletada com sucesso.', title: 'Alerta', type: 'success'});
+                updatePassagens();
+            }
+        });
+    }
+
+    function editaPassagem(obj) {
+        loadTrechos();
+
+        $.ajax({
+            url: '/passagem/' + obj.id,
+            method: 'GET',
+            success: function (json) {
+                $('#formEditaPassagem #_id').val(json._id);
+                $('#formEditaPassagem #trecho').val(json._voo);
+                $('#formEditaPassagem #trecho').change();
+                $('#formEditaPassagem #tipoAssento').val(json.tipoAssento);
+                $('#formEditaPassagem #nomePassageiro').val(json.nomePassageiro);
+            }
+        });
+    }
+
+    function loadTrechos() {
+        $.ajax({
+            url: '/voo',
+            method: 'GET',
+            success: function (json) {
+                $('select[name=trecho]').html('<option value="" selected>Selecionar Trecho</option>');
+                $(json).each(function (key, value) {
+                    $('select[name=trecho]').append('<option value="' + value._id + '">' + value.origem + ' / ' + value.destino + ' | ' + $.formatDateTime('dd/mm/yy gg:ii', new Date(value.dataOrigem)) + ' / ' + $.formatDateTime('dd/mm/yy gg:ii', new Date(value.dataDestino)) + '</option>');
+                });
+            }
+        });
+    }
+
+    function assentoEscolhido(v) {
+        $('#formInserePassagem #assentoEscolhido, #formEditaPassagem #assentoEscolhido').val(v);
+        $('.assentos').each(function (key, value) {
+            if ($(value).attr('data-assento') != v && $(value).attr('data-reservado') != 'true') {
+                $('.assento' + $(value).attr('data-assento')).attr('class', 'btn btn-success assentos assento' + $(value).attr('data-assento')).attr('data-original-title', 'Assento Disponível');
+            }
+        });
+        $('.assento' + v).attr('class', 'btn btn-warning assentos assento' + v).attr('data-original-title', 'Assento Selecionado');
+    }
+</script>
+<style>
+    .pac-container {
+        z-index: 2000 !important;
+    }
+
+    #page-wrapper {
+        margin: 0 0 0 0;
+        border: 0;
+    }
+
+    .footer {
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 70px;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+    }
+
+    .container .text-muted {
+        margin: 20px 0;
+    }
+</style>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Airline UNIP System">
+    <meta name="author" content="Matheus Lucio">
+    <title>
+        <%= title %> - Unip Airlines
+    </title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="https://bootswatch.com/yeti/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="/"><i class="fa fa-users"></i> <%= title %></a>
+            </div>
+            <!-- /.navbar-header -->
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/"><i class="fa fa-plane"></i> Voo's</a></li>
+                    <li><a href="/passagens"><i class="fa fa-ticket"></i> Passagens</a></li>
+                    <li class="active"><a href="/alunos"><i class="fa fa-users"></i> Alunos</a></li>
+                    <li><a href="/api"><i class="fa fa-cog"></i> API</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Alunos</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default panel-primary">
+                        <div class="panel-heading">Sobre</div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p>Este sistema foi desenvolvido pelos alunos da listagem abaixo, para contemplar o projeto descrito pelo professor <b>Ricardo Loiola</b> da <b>Universidade Paulista de Brasília (UNIP - DF)</b>. Referente à matéria de <b>Desenvolvimento de Sistemas Distribuídos</b>.</p>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default panel-danger">
+                        <div class="panel-heading">Lista de alunos deste trabalho</div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>RA</th>
+                                        <th>Turma</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Matheus Lúcio</td>
+                                        <td>B75902-0</td>
+                                        <td>SI8P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Matheus Nascimento</td>
+                                        <td>B8776D-1</td>
+                                        <td>SI7P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>André Souza</td>
+                                        <td>B82HJA-2</td>
+                                        <td>SI8P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Samuel Freire</td>
+                                        <td>B7576H-9</td>
+                                        <td>SI8P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wilson Lucas</td>
+                                        <td>B847HG-0</td>
+                                        <td>SI8P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alisson Henrique</td>
+                                        <td>B914BE-0</td>
+                                        <td>SI7P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jailson Martins</td>
+                                        <td>B79BAG-1</td>
+                                        <td>SI8P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cristiano Jesus</td>
+                                        <td>B76BJJ-5</td>
+                                        <td>SI8P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hitiel Souza</td>
+                                        <td>B926DG-9</td>
+                                        <td>SI7P30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Raissa Souza</td>
+                                        <td>B964DA-9</td>
+                                        <td>SI7P30</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                Tecnologias: <img src="https://img.shields.io/badge/node-js-43853d.svg">
+                <img src="https://img.shields.io/badge/express-js-259dff.svg">
+                <img src="https://img.shields.io/badge/mongo-db-6aaf4e.svg">
+                <img src="https://img.shields.io/badge/jquery-js-0769ad.svg">
+                <img src="https://img.shields.io/badge/bootstrap-css-6f5499.svg">
+            </p>
+        </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/dist/js/sb-admin-2.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.formatDateTime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/pt-br.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyCqD6cqGfHpXLZiQnxtIhcVY-nb9UfAXQA"></script>
+    <script src="/bower_components/jquery/dist/jquery.geocomplete.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <style>
+        .pac-container {
+            z-index: 2000 !important;
+        }
+
+        #page-wrapper {
+            margin: 0 0 0 0;
+            border: 0;
+        }
+
+        .footer {
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 70px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: auto;
+            max-width: 680px;
+            padding: 0 15px;
+        }
+
+        .container .text-muted {
+            margin: 20px 0;
+        }
+    </style>
+</body>
+
+</html>
