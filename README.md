@@ -16,7 +16,7 @@ Para o MongoDB, preferi não hospedar um servidor local, acabei usando da mLab m
 
 # Demo
 
-https://unipairlines.herokuapp.com/ (Ferramenta com front-end)
+https://unipairlines.herokuapp.com/ (Ferramenta completa com o front-end)
 
 ### Endpoints REST
 
