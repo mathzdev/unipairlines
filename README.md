@@ -36,7 +36,7 @@ https://unipairlines.herokuapp.com/voo/57be39fdfe81c61100cbed06
 
 #
 
-#### Para o `DELETE` e `UPDATE` usar a mesma URL do `GET ONE`, para a URL do `GET ONE` é necessário o ID do registro único, ex: para usuario o id 59cbe76f0f81e712000b2100
+#### Para o `DELETE` e `UPDATE` usar a mesma URL do `GET ONE`, para a URL do `GET ONE` é necessário o ID do registro único, ex: para endpoint passagem o id 57de6dde7b573ca9b4b93d71
 
 #
 
