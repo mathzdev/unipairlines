@@ -20,7 +20,7 @@ https://unipairlines.herokuapp.com/ (Ferramenta completa com o front-end)
 
 ### Endpoints REST
 
-`GET All`
+`GET {LIST}`
 
 https://unipairlines.herokuapp.com/passagem
 
@@ -28,7 +28,7 @@ https://unipairlines.herokuapp.com/voo
 
 #
 
-`GET ONE`
+`GET {ONE}`
 
 https://unipairlines.herokuapp.com/passagem/57de6dde7b573ca9b4b93d71
 
